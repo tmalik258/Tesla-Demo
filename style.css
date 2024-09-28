@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body, 
+html {
+  overflow-x: hidden;
+}
+
+.webgl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.models-selector {
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  position: absolute;
+  inset: auto 3rem 2rem 3rem;
+}
+
+.models-selector button {
+  background-color: #fff;
+  border: 0;
+  border-radius: .3rem;
+  padding: 1rem;
+  padding-inline: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .1s ease-in-out;
+  transition-property: background-color, color;
+}
+
+.models-selector button:hover {
+  background-color: #212121;
+  color: #fff;
+}
