@@ -17,153 +17,471 @@ const mockupData = [
 		path: "/models/human-model.glb",
 		scale: [4, 4, 4],
 		position: [0, -5, 0],
-		// Keyframes for arm and leg animation (basic walking motion example)
-		animationKeyframes: {
-			// Hip movement (smoother, less exaggerated)
-			// Hip: [
-			// 	{ time: 0, position: [0, 0, 0], rotation: [0, 0, 0] },
-			// 	{ time: 0.25, position: [0, -0.02, 0.05], rotation: [0, 0.05, 0] },
-			// 	{ time: 0.5, position: [0, 0, 0], rotation: [0, 0, 0] },
-			// 	{ time: 0.75, position: [0, -0.02, -0.05], rotation: [0, -0.05, 0] },
-			// 	{ time: 1, position: [0, 0, 0], rotation: [0, 0, 0] },
-			// ],
+		// Keyframes (idle motion)
+		idle: {
+			animationKeyframes: {
+				// Upper Body (subtle movement for natural sway)
+				Head: [
+					{
+						time: 0,
+						rotation: [-0.3, 0, 0],
+					},
+					{ time: 0.25, rotation: [-0.3, 0.1, 0] },
+					{ time: 0.5, rotation: [-0.3, 0, 0] },
+					{ time: 0.75, rotation: [-0.3, -0.1, 0] },
+					{
+						time: 1,
+						rotation: [-0.3, 0, 0],
+					},
+				],
+				Spine: [
+					{
+						time: 0,
+						rotation: [
+							-0.2716005698330194, 0.011917025389211734,
+							-0.0005382293770487181,
+						],
+					},
+					{ time: 0.5, rotation: [-0.3, -0.1, 0] },
+					{
+						time: 1,
+						rotation: [
+							-0.2716005698330194, 0.011917025389211734,
+							-0.0005382293770487181,
+						],
+					},
+				],
+				chest: [
+					{ time: 0, rotation: [-0.23306074082928993, 0, 0] },
+					{ time: 0.5, rotation: [-0.2, 0.05, 0] },
+					{ time: 1, rotation: [-0.23306074082928993, 0, 0] },
+				],
 
-			// Spine and chest (subtle movement for natural sway)
-			Spine: [
-				{
-					time: 0,
-					rotation: [
-						-0.2716005698330194, 0.011917025389211734, -0.0005382293770487181,
-					],
-				},
-				{ time: 0.5, rotation: [-0.3, -0.1, 0] },
-				{
-					time: 1,
-					rotation: [
-						-0.2716005698330194, 0.011917025389211734, -0.0005382293770487181,
-					],
-				},
-			],
-			chest: [
-				{ time: 0, rotation: [-0.23306074082928993, 0, 0] },
-				{ time: 0.5, rotation: [-0.2, 0.05, 0] },
-				{ time: 1, rotation: [-0.23306074082928993, 0, 0] },
-			],
+				// Left Body
+				// Upper Arm (Shoulder) movement
+				UpperArmL: [
+					{
+						time: 0,
+						rotation: [
+							0.18387987275072057, -0.061921212423275265, -1.6,
+						],
+					},
+					{
+						time: 0.5,
+						rotation: [0.3, -0.061921212423275265, -1.51],
+					},
+					{
+						time: 1,
+						rotation: [
+							0.18387987275072057, -0.061921212423275265, -1.6,
+						],
+					},
+				],
 
-			// Legs (more natural alternating motion)
-			// UpperLegL: [
-			// 	{ time: 0, rotation: [-3.5, 3, 0.15] },
-			// 	{ time: 0.25, rotation: [-4, 3, 0.15] },
-			// 	{ time: 0.5, rotation: [-3.5, 3, 0.15] },
-			// 	{ time: 0.75, rotation: [-3, 3, 0.15] },
-			// 	{ time: 1, rotation: [-3.5, 3, 0.15] },
-			// ],
-			// LowerLegL: [
-			// 	{ time: 0, rotation: [-0.3, 0, 0] },
-			// 	{ time: 0.25, rotation: [0.1, 0, 0] },
-			// 	{ time: 0.5, rotation: [0.6, 0, 0] },
-			// 	{ time: 0.75, rotation: [0.2, 0, 0] },
-			// 	{ time: 1, rotation: [-0.3, 0, 0] },
-			// ],
-			// UpperLegR: [
-			//   { time: 0, rotation: [ -0.3, 0, 0 ] },
-			//   { time: 0.5, rotation: [ 0.6, 0, 0 ] },
-			//   { time: 1, rotation: [ -0.3, 0, 0 ] },
-			// ],
-			// LowerLegR: [
-			//   { time: 0, rotation: [ 0.6, 0, 0 ] },
-			//   { time: 0.25, rotation: [ 0.2, 0, 0 ] },
-			//   { time: 0.5, rotation: [ -0.3, 0, 0 ] },
-			//   { time: 0.75, rotation: [ 0.1, 0, 0 ] },
-			//   { time: 1, rotation: [ 0.6, 0, 0 ] },
-			// ],
+				// Lower Arm (Elbow) movement
+				LowerArmL: [
+					{
+						time: 0,
+						rotation: [
+							0.1883853042003649, 0.2, -0.13058974104839177,
+						],
+					},
+					{ time: 0.5, rotation: [0.1883853042003649, 0.2, -0.1] },
+					{
+						time: 1,
+						rotation: [
+							0.1883853042003649, 0.2, -0.13058974104839177,
+						],
+					},
+				],
 
-			// // Feet (more pronounced heel-to-toe motion)
-			// FootL: [
-			// 	{ time: 0, rotation: [-0.2, 0, 0] },
-			// 	{ time: 0.25, rotation: [0.3, 0, 0] },
-			// 	{ time: 0.5, rotation: [0, 0, 0] },
-			// 	{ time: 0.75, rotation: [-0.1, 0, 0] },
-			// 	{ time: 1, rotation: [-0.2, 0, 0] },
-			// ],
-			// FootR: [
-			//   { time: 0, rotation: [ 0, 0, 0 ] },
-			//   { time: 0.25, rotation: [ -0.1, 0, 0 ] },
-			//   { time: 0.5, rotation: [ -0.2, 0, 0 ] },
-			//   { time: 0.75, rotation: [ 0.3, 0, 0 ] },
-			//   { time: 1, rotation: [ 0, 0, 0 ] },
-			// ],
+				// Hand movement (if needed)
+				HandL: [
+					{
+						time: 0,
+						rotation: [-0.12442307478670014, -0.229973, -3],
+					},
+					{
+						time: 0.5,
+						rotation: [-0.12, -0.229973, -3],
+					},
+					{
+						time: 1,
+						rotation: [-0.12442307478670014, -0.229973, -3],
+					},
+				],
 
-			// // Arms (natural swing, opposite to legs)
-			// UpperArmL: [
-			//   { time: 0, rotation: [ -0.4, 0, 0.1 ] },
-			//   { time: 0.5, rotation: [ 0.4, 0, -0.1 ] },
-			//   { time: 1, rotation: [ -0.4, 0, 0.1 ] },
-			// ],
-			// LowerArmL: [
-			//   { time: 0, rotation: [ 0.1, 0, 0 ] },
-			//   { time: 0.5, rotation: [ 0.2, 0, 0 ] },
-			//   { time: 1, rotation: [ 0.1, 0, 0 ] },
-			// ],
-			// UpperArmR: [
-			//   { time: 0, rotation: [ 0.4, 0, -0.1 ] },
-			//   { time: 0.5, rotation: [ -0.4, 0, 0.1 ] },
-			//   { time: 1, rotation: [ 0.4, 0, -0.1 ] },
-			// ],
-			// LowerArmR: [
-			//   { time: 0, rotation: [ 0.2, 0, 0 ] },
-			//   { time: 0.5, rotation: [ 0.1, 0, 0 ] },
-			//   { time: 1, rotation: [ 0.2, 0, 0 ] },
-			// ],
+				// Hand IK (subtle natural movement)
+				Hand_IKL: [
+					{
+						time: 0,
+						position: [0.37, -0.43, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 0.5,
+						position: [0.45, -0.4, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 1,
+						position: [0.37, -0.43, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+				],
 
-			// // Head (subtle movement for realism)
-			// Head: [
-			//   { time: 0, rotation: [ 0.05, 0, 0 ] },
-			//   { time: 0.5, rotation: [ -0.05, 0, 0 ] },
-			//   { time: 1, rotation: [ 0.05, 0, 0 ] },
-			// ],
+				// Right Body
+				// Upper Arm (Shoulder) movement
+				UpperArmR: [
+					{
+						time: 0,
+						rotation: [10, -3.3, -1.6],
+					},
+					{ time: 0.5, rotation: [10, -3.3, -1.51] },
+					{
+						time: 1,
+						rotation: [10, -3.3, -1.6],
+					},
+				],
 
-			// // Hand IK (subtle natural movement)
-			// Hand_IKL: [
-			//   { time: 0, rotation: [ 0, 0, 0 ] },
-			//   { time: 0.5, rotation: [ 0.1, 0, 0 ] },
-			//   { time: 1, rotation: [ 0, 0, 0 ] },
-			// ],
-			// Hand_IKR: [
-			//   { time: 0, rotation: [ 0.1, 0, 0 ] },
-			//   { time: 0.5, rotation: [ 0, 0, 0 ] },
-			//   { time: 1, rotation: [ 0.1, 0, 0 ] },
-			// ],
+				// Lower Arm (Elbow) movement
+				LowerArmR: [
+					{
+						time: 0,
+						rotation: [
+							0.18838521208929873, 0.2, -0.13058974104839177,
+						],
+					},
+					{ time: 0.5, rotation: [0.18838521208929873, 0.2, -0.1] },
+					{
+						time: 1,
+						rotation: [
+							0.18838521208929873, 0.2, -0.13058974104839177,
+						],
+					},
+				],
 
-			// // Clavicles (subtle movement for shoulder realism)
-			// ClavL: [
-			//   { time: 0, rotation: [ 0, 0, -0.05 ] },
-			//   { time: 0.5, rotation: [ 0, 0, 0.05 ] },
-			//   { time: 1, rotation: [ 0, 0, -0.05 ] },
-			// ],
-			// ClavR: [
-			//   { time: 0, rotation: [ 0, 0, 0.05 ] },
-			//   { time: 0.5, rotation: [ 0, 0, -0.05 ] },
-			//   { time: 1, rotation: [ 0, 0, 0.05 ] },
-			// ],
+				// Hand movement (if needed)
+				HandR: [
+					{
+						time: 0,
+						rotation: [0, -10, 3],
+					},
+					{
+						time: 0.5,
+						rotation: [0, -10, 3],
+					},
+					{
+						time: 1,
+						rotation: [0, -10, 3],
+					},
+				],
+				// Hand IK (subtle natural movement)
+				Hand_IKR: [
+					{
+						time: 0,
+						position: [-0.45, -0.38, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 0.5,
+						position: [-0.39, -0.36, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 1,
+						position: [-0.45, -0.38, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+				],
+			},
+		},
+		// Keyframes (walking motion)
+		walking: {
+			animationKeyframes: {
+				// Hip movement (smoother, less exaggerated)
+				// Hip: [
+				// 	{ time: 0, position: [0, 0, 0], rotation: [0, 0, 0] },
+				// 	{ time: 0.25, position: [0, -0.02, 0.05], rotation: [0, 0.05, 0] },
+				// 	{ time: 0.5, position: [0, 0, 0], rotation: [0, 0, 0] },
+				// 	{ time: 0.75, position: [0, -0.02, -0.05], rotation: [0, -0.05, 0] },
+				// 	{ time: 1, position: [0, 0, 0], rotation: [0, 0, 0] },
+				// ],
 
-			// // Leg targets (if using IK, adjust as needed)
-			// LegTargetL: [
-			// 	{ time: 0, position: [0, 0, 0.2] },
-			// 	{ time: 0.5, position: [0, 0, -0.2] },
-			// 	{ time: 1, position: [0, 0, 0.2] },
-			// ],
-			// LegTargetR: [
-			//   { time: 0, position: [ 0, 0, -0.2 ] },
-			//   { time: 0.5, position: [ 0, 0, 0.2 ] },
-			//   { time: 1, position: [ 0, 0, -0.2 ] },
-			// ],
+				// Upper Body (subtle movement for natural sway)
+				Head: [
+					{
+						time: 0,
+						rotation: [-0.3, 0, 0],
+					},
+					{ time: 0.25, rotation: [-0.3, 0.1, 0] },
+					{ time: 0.5, rotation: [-0.3, 0, 0] },
+					{ time: 0.75, rotation: [-0.3, -0.1, 0] },
+					{
+						time: 1,
+						rotation: [-0.3, 0, 0],
+					},
+				],
+				Spine: [
+					{
+						time: 0,
+						rotation: [
+							-0.2716005698330194, 0.011917025389211734,
+							-0.0005382293770487181,
+						],
+					},
+					{ time: 0.5, rotation: [-0.3, -0.1, 0] },
+					{
+						time: 1,
+						rotation: [
+							-0.2716005698330194, 0.011917025389211734,
+							-0.0005382293770487181,
+						],
+					},
+				],
+				chest: [
+					{ time: 0, rotation: [-0.23306074082928993, 0, 0] },
+					{ time: 0.5, rotation: [-0.2, 0.05, 0] },
+					{ time: 1, rotation: [-0.23306074082928993, 0, 0] },
+				],
+
+				// Legs (more natural alternating motion)
+				// UpperLegL: [
+				// 	{ time: 0, rotation: [-3.5, 3, 0.15] },
+				// 	{ time: 0.25, rotation: [-4, 3, 0.15] },
+				// 	{ time: 0.5, rotation: [-3.5, 3, 0.15] },
+				// 	{ time: 0.75, rotation: [-3, 3, 0.15] },
+				// 	{ time: 1, rotation: [-3.5, 3, 0.15] },
+				// ],
+				// LowerLegL: [
+				// 	{ time: 0, rotation: [-0.3, 0, 0] },
+				// 	{ time: 0.25, rotation: [0.1, 0, 0] },
+				// 	{ time: 0.5, rotation: [0.6, 0, 0] },
+				// 	{ time: 0.75, rotation: [0.2, 0, 0] },
+				// 	{ time: 1, rotation: [-0.3, 0, 0] },
+				// ],
+				// UpperLegR: [
+				//   { time: 0, rotation: [ -0.3, 0, 0 ] },
+				//   { time: 0.5, rotation: [ 0.6, 0, 0 ] },
+				//   { time: 1, rotation: [ -0.3, 0, 0 ] },
+				// ],
+				// LowerLegR: [
+				//   { time: 0, rotation: [ 0.6, 0, 0 ] },
+				//   { time: 0.25, rotation: [ 0.2, 0, 0 ] },
+				//   { time: 0.5, rotation: [ -0.3, 0, 0 ] },
+				//   { time: 0.75, rotation: [ 0.1, 0, 0 ] },
+				//   { time: 1, rotation: [ 0.6, 0, 0 ] },
+				// ],
+
+				// Feet (more pronounced heel-to-toe motion)
+				// FootL: [
+				// 	{ time: 0, rotation: [-0.2, 0, 0] },
+				// 	{ time: 0.25, rotation: [0.3, 0, 0] },
+				// 	{ time: 0.5, rotation: [0, 0, 0] },
+				// 	{ time: 0.75, rotation: [-0.1, 0, 0] },
+				// 	{ time: 1, rotation: [-0.2, 0, 0] },
+				// ],
+				// FootR: [
+				//   { time: 0, rotation: [ 0, 0, 0 ] },
+				//   { time: 0.25, rotation: [ -0.1, 0, 0 ] },
+				//   { time: 0.5, rotation: [ -0.2, 0, 0 ] },
+				//   { time: 0.75, rotation: [ 0.3, 0, 0 ] },
+				//   { time: 1, rotation: [ 0, 0, 0 ] },
+				// ],
+
+				// Left Body
+				// Upper Arm (Shoulder) movement
+				UpperArmL: [
+					{
+						time: 0,
+						rotation: [
+							0.18387987275072057, -0.061921212423275265, -1.6,
+						],
+					},
+					{
+						time: 0.5,
+						rotation: [0.3, -0.061921212423275265, -1.51],
+					},
+					{
+						time: 1,
+						rotation: [
+							0.18387987275072057, -0.061921212423275265, -1.6,
+						],
+					},
+				],
+
+				// Lower Arm (Elbow) movement
+				LowerArmL: [
+					{
+						time: 0,
+						rotation: [
+							0.1883853042003649, 0.2, -0.13058974104839177,
+						],
+					},
+					{ time: 0.5, rotation: [0.1883853042003649, 0.2, -0.1] },
+					{
+						time: 1,
+						rotation: [
+							0.1883853042003649, 0.2, -0.13058974104839177,
+						],
+					},
+				],
+
+				// Hand movement (if needed)
+				HandL: [
+					{
+						time: 0,
+						rotation: [-0.12442307478670014, -0.229973, -3],
+					},
+					{
+						time: 0.5,
+						rotation: [-0.12, -0.229973, -3],
+					},
+					{
+						time: 1,
+						rotation: [-0.12442307478670014, -0.229973, -3],
+					},
+				],
+
+				// Hand IK (subtle natural movement)
+				Hand_IKL: [
+					{
+						time: 0,
+						position: [0.37, -0.43, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 0.5,
+						position: [0.45, -0.4, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 1,
+						position: [0.37, -0.43, -0.12],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+				],
+
+				// Right Body
+				// Upper Arm (Shoulder) movement
+				UpperArmR: [
+					{
+						time: 0,
+						rotation: [10, -3.3, -1.6],
+					},
+					{ time: 0.5, rotation: [10, -3.3, -1.51] },
+					{
+						time: 1,
+						rotation: [10, -3.3, -1.6],
+					},
+				],
+
+				// Lower Arm (Elbow) movement
+				LowerArmR: [
+					{
+						time: 0,
+						rotation: [
+							0.18838521208929873, 0.2, -0.13058974104839177,
+						],
+					},
+					{ time: 0.5, rotation: [0.18838521208929873, 0.2, -0.1] },
+					{
+						time: 1,
+						rotation: [
+							0.18838521208929873, 0.2, -0.13058974104839177,
+						],
+					},
+				],
+
+				// Hand movement (if needed)
+				HandR: [
+					{
+						time: 0,
+						rotation: [0, -10, 3],
+					},
+					{
+						time: 0.5,
+						rotation: [0, -10, 3],
+					},
+					{
+						time: 1,
+						rotation: [0, -10, 3],
+					},
+				],
+				// Hand IK (subtle natural movement)
+				Hand_IKR: [
+					{
+						time: 0,
+						position: [-0.45, -0.38, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 0.5,
+						position: [-0.39, -0.36, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+					{
+						time: 1,
+						position: [-0.45, -0.38, -0.05],
+						rotation: [
+							0.20154235850257682, 5, 0.0012462226000999547,
+						],
+					},
+				],
+
+				// // Clavicles (subtle movement for shoulder realism)
+				// ClavL: [
+				//   { time: 0, rotation: [ 0, 0, -0.05 ] },
+				//   { time: 0.5, rotation: [ 0, 0, 0.05 ] },
+				//   { time: 1, rotation: [ 0, 0, -0.05 ] },
+				// ],
+				// ClavR: [
+				//   { time: 0, rotation: [ 0, 0, 0.05 ] },
+				//   { time: 0.5, rotation: [ 0, 0, -0.05 ] },
+				//   { time: 1, rotation: [ 0, 0, 0.05 ] },
+				// ],
+
+				// // Leg targets (if using IK, adjust as needed)
+				// LegTargetL: [
+				// 	{ time: 0, position: [0, 0, 0.2] },
+				// 	{ time: 0.5, position: [0, 0, -0.2] },
+				// 	{ time: 1, position: [0, 0, 0.2] },
+				// ],
+				// LegTargetR: [
+				//   { time: 0, position: [ 0, 0, -0.2 ] },
+				//   { time: 0.5, position: [ 0, 0, 0.2 ] },
+				//   { time: 1, position: [ 0, 0, -0.2 ] },
+				// ],
+			},
 		},
 	},
 ];
 
 // Scene
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffffff);
 
 // Sizes
 const sizes = {
@@ -174,7 +492,7 @@ const sizes = {
 // Light
 const light = new THREE.PointLight(0xffffff, 150, 100);
 light.position.set(0, 10, 10);
-scene.add( light );
+scene.add(light);
 
 // ground
 
@@ -245,16 +563,16 @@ const animateModel = (model, keyframes) => {
 	model.skeleton.bones.map((object) => {
 		if (object.isBone && keyframes[object.name]) {
 			bones[object.name] = object;
-    }
+		}
 	});
-  
+
 	// Create a mixer for the animations
 	mixer = new THREE.AnimationMixer(model);
-  
+
 	// Loop over keyframes and create animations
 	Object.keys(keyframes).forEach((boneName) => {
-    const bone = bones[boneName];
-    console.log(
+		const bone = bones[boneName];
+		console.log(
 			`Bone Name: ${bone.name}, Default Position: ${bone.position.x}, ${bone.position.y}, ${bone.position.z}, Default Rotation: ${bone.rotation.x}, ${bone.rotation.y}, ${bone.rotation.z}`
 		);
 		const keyframeData = keyframes[boneName];
@@ -303,7 +621,11 @@ const animateModel = (model, keyframes) => {
 		// Only create and play animation if there are tracks
 		if (tracks.length > 0) {
 			// Create an animation clip
-			const clip = new THREE.AnimationClip(boneName + "_animation", -1, tracks);
+			const clip = new THREE.AnimationClip(
+				boneName + "_animation",
+				-1,
+				tracks
+			);
 
 			// Add the clip to the mixer and play it
 			const action = mixer.clipAction(clip);
@@ -317,15 +639,15 @@ const animateModel = (model, keyframes) => {
 loader.load(mockupData[1].path, (gltf) => {
 	const model = gltf.scene;
 	model.scale.set(...mockupData[1].scale);
-  model.position.set( ...mockupData[ 1 ].position );
-  // model.rotation.y = 1.6
+	model.position.set(...mockupData[1].position);
+	// model.rotation.y = 1.6
 	scene.add(model);
 
 	// Check if the model has a skeleton
 	model.traverse((child) => {
 		if (child.isSkinnedMesh) {
 			// Animate the model using the predefined keyframes
-			animateModel(child, mockupData[1].animationKeyframes);
+			animateModel(child, mockupData[1].idle.animationKeyframes);
 		}
 	});
 
